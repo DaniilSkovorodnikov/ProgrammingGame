@@ -11,7 +11,8 @@ using System.Windows.Forms;
 namespace Game.GameController
 {
     public class Player
-    {
+    {   
+        //позиция
         public static int posX { get; set; }
         public static int posY { get; set; }
         public static Image sprite { get; set; }
