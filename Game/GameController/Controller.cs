@@ -30,14 +30,30 @@ namespace Game.GameController
             questions = new List<string>() {
                 "ln(x) = 1;  x - ?",
                 "x=sin(pi/2);  x - ?",
-                "new int[]{1,2,3} == \nnew int[]{1,2,3}",
-                "Какова сложность алгоритма\nбинарного поиска?",
-                "Вычислите интеграл от\n1/tg(x)",
-                "Динамический метод можно\nвызывать только в контексте\nэкземпляра класса",
+                "new int[]{1,2,3} == new int[]{1,2,3}",
+                "Какова сложность алгоритма бинарного поиска?",
+                "Вычислите интеграл от 1/tg(x)",
+                "Динамический метод можно вызывать только в контексте экземпляра класса",
                 "var a = 3;\nvar b = a/2;\nЧему равно b?",
-                "Сколько будет 2+2?"
+                "С помощью какой универсальной подстановки рационализируется тригонометрическая функция",
+                "Что обозначает ключевое слово var ?",
+                "Выберите наибольшее число для которого истинно (X > 5) И НЕ(X<15)",
+                "Выберите метод LINQ удаляющий все дубликаты из коллекции",
+                "Можно ли объявлять делегат неявным образом? Например:\nvar increment = (x) => x++;",
+                "На клавиатуре телефона 10 цифр, от 0  до 9. Какова вероятность того, что случайно нажатая цифра будет чётной?",
+                "Какой класс в Windows Forms отвечает за рисование?",
+                "Как на один делегат подписать несколько методов?",
+                "Какое ключевое слово используется при определении делегата?",
+                "Как по умолчанию работает оператор == ?",
+                "Являются ли методы ToList и ToArray ленивыми?",
+                "Что делает метод стека Push?",
+                "Как переопределить виртуальный метод?",
+                "Возможно ли сложить разные лямбда выражения в лист?",
+                "Как объявить какой-либо класс с универсальным типом?"
             };
-            correctAnswers = new List<string>() { "e", "1", "false","O(log(n))","ln(sin(x))", "Верно","1","5000"};
+            correctAnswers = new List<string>() { "e", "1", "false","O(log(n))","ln(sin(x))", "Верно","1","t = tg(x/2)",
+            "Обозначает неявный тип данных","15","Distinct","Нельзя", "0,5", "Graphics", "Через команду +=", "delegate",
+            "Сравнивает по ссылке", "Не являются", "Вносит элемент в стек", "Использовать override", "Возможно", "class Name<T>"};
             possibleAnswers = new List<List<string>>()
             {
                 new List<string> { "0", "1", "e"},
@@ -47,7 +63,21 @@ namespace Game.GameController
                 new List<string> { "-1/cos(x)^2", "ln(sin(x))", "cos(x)^2"},
                 new List<string> { "Верно", "Неверно"},
                 new List<string> { "1", "1.5", "2"},
-                new List<string> { "4", "5000"}
+                new List<string> { "t = tg(x/2)", "t = sin(2x)", "tg(x)"},
+                new List<string> { "Объявляет войну программ", "Обозначает неявный тип данных", "Обозночает явный тип данных"},
+                new List<string> { "14", "5", "15"},
+                new List<string> { "Distinct", "Intersect", "Skip"},
+                new List<string> { "Можно", "Нельзя"},
+                new List<string> { "0,5", "4/9", "0,4"},
+                new List<string> { "Drawing", "Graphics", "Paint"},
+                new List<string> { "Через команду +=", "Нельзя", "delegate.Add()"},
+                new List<string> { "delegate", "function", "Такого слова нет"},
+                new List<string> { "Сравнивает по ссылке", "Сравнивает по полям"},
+                new List<string> { "Являются", "Не являются"},
+                new List<string> { "Вносит элемент в стек", "Удаляет элемент из стека"},
+                new List<string> { "Использовать override", "Написать как простой метод", "Нельзя переопределить"},
+                new List<string> { "Возможно", "Невозможно"},
+                new List<string> { "class<T> Name", "class Name<T>", "class T Name"}
             };
             currentStep = 0;
             prevPositions = new Stack<Point>();
@@ -55,9 +85,18 @@ namespace Game.GameController
 
         public static void MakeStep()
         {
-            if (currentStep == questions.Count)
+            if (score == Level1.ChestsCount)
+            {
+                CreateControls.CreateExitPanel(true);
                 return;
-            questionPanel = CreateControls.CreateQuestionPanel(questions[currentStep], possibleAnswers[currentStep]);
+            }
+  
+            if (currentStep == questions.Count && score != Level1.ChestsCount)
+            {
+                CreateControls.CreateExitPanel(false);
+                return;
+            }
+            questionPanel = CreateControls.CreateQuestionPanel(questions[currentStep], possibleAnswers);
             game.Controls.Add(questionPanel);
             questionPanel.Controls[3].Click += (sender, e) =>
             {

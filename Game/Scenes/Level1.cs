@@ -14,9 +14,10 @@ namespace Game.Scenes
     public class Level1 : Scene
     {
         private Form game;
-        public Map level1;
-        public Player player;
-        public static Label scoreLabel;
+        public Map level1 { get; set; }
+        private Player player;
+        public static Label scoreLabel { get; set; }
+        public static int ChestsCount { get; set; }
 
         public Level1(Form game)
         {
@@ -26,6 +27,7 @@ namespace Game.Scenes
             this.game = game;
             level1 = new Map();
             player = new Player(level1.Start, Properties.Resources.Player);
+            ChestsCount = 6;
         }
 
         private void OnKeyDownEsc(object sender, KeyEventArgs e)

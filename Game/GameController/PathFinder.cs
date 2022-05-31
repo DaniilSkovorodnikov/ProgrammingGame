@@ -47,9 +47,7 @@ namespace Game.GameController
                 currentPoint = currentPoint.Previous;
             }
             path.Reverse();
-            //if (path.Count >= 4) return path[3];
-            //else return path[path.Count - 1];
-            if (path.Count >= 4) return path.Take(4).ToList();
+            if (path.Count >= 5) return path.Take(5).ToList();
             else return path;
         }
 

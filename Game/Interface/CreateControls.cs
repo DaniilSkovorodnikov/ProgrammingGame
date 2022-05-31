@@ -33,7 +33,7 @@ namespace Game.Interface
             return button;
         }
         
-        public static Panel CreateQuestionPanel(string questionText, List<string> possibleAnswers)
+        public static Panel CreateQuestionPanel(string questionText, List<List<string>> possibleAnswers)
         {
                 var panel = new Panel();
                 var question = new Label();
@@ -55,7 +55,7 @@ namespace Game.Interface
                 question.Text = questionText;
                 question.TextAlign = ContentAlignment.MiddleCenter;
                 question.Size = new Size(panel.Width, 74);
-                question.Font = new Font("Rockwell", 16);
+                question.Font = new Font("Rockwell", 14);
 
                 foreach (var answer in possibleAnswers[Controller.currentStep])
                     answers.Items.Add(answer);
@@ -74,7 +74,36 @@ namespace Game.Interface
                 panel.Controls.Add(checkAnswer);
                 return panel;
         }
-        
+
+
+        public static void CreateExitPanel(bool isWin)
+        {
+            var exitPanel = new Panel();
+            var label = new Label();
+            var exitButton = new Button();
+
+            exitPanel.Location = new Point(800, 420);
+            exitPanel.Size = new Size(300, 100);
+            exitPanel.BorderStyle = BorderStyle.Fixed3D;
+
+            label.Location = new Point(0, 0);
+            if(isWin)
+                label.Text = "Вы выиграли!";
+            else
+                label.Text = "Вы проиграли!";
+            label.TextAlign = ContentAlignment.MiddleCenter;
+            label.Size = new Size(exitPanel.Width, 32);
+            label.Font = new Font("Rockwell", 16);
+
+            exitButton.Location = new Point(75, 50);
+            exitButton.Text = "Выйти из игры";
+            exitButton.Size = new Size(150, 40);
+            exitButton.Click += (s, e) => Application.Exit();
+
+            exitPanel.Controls.Add(label);
+            exitPanel.Controls.Add(exitButton);
+            game.Controls.Add(exitPanel);
+        }
 
         public static Label CreateScoreLabel(int score)
         {
