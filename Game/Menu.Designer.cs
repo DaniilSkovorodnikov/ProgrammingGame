@@ -2,7 +2,7 @@
 
 namespace Game
 {
-    partial class Menu
+    partial class Game
     {
         /// <summary>
         /// Обязательная переменная конструктора.

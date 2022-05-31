@@ -14,7 +14,5 @@ namespace Game.Interface
         public static int CurrentScene { get; set; }
         public static Graphics CurrentGraphics { get; set; }
         public static Timer Timer { get; set; }
-
-
     }
 }

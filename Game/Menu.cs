@@ -1,25 +1,16 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using Game.GameController;
 using Game.Interface;
-using Game.MapController;
 using Game.Scenes;
 
 namespace Game
 {
-    public partial class Menu : Form
+    public partial class Game : Form
     {
-        public static Scenes.MainMenu mainMenu;
-        public static Level1 level1;
-        public Menu()
+        public static Scenes.MainMenu mainMenu { get; set; }
+        public static Level1 level1 { get; set; }
+        public Game()
         {
             InitializeComponent();
         }

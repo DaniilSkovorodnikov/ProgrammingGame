@@ -3,9 +3,6 @@ using Game.MapController;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Game.Scenes
@@ -18,7 +15,6 @@ namespace Game.Scenes
             ID = 0;
             SceneButtons = new List<Button>();
             SceneLabels = new List<Label>();
-            SceneSprites = new List<MapCell>();
             this.game = game;
             BackgroundImage = Properties.Resources.BackgroundMenu;
             SceneButtons.Add(CreateControls.CreateButton(724, 208, Properties.Resources.StartGame, new Point(598, 378)));

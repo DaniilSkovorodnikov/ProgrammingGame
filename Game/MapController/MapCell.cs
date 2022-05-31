@@ -24,7 +24,6 @@ namespace Game.MapController
 
     public enum Cell 
     { 
-        Empty,
         Trail,
         Wall,
         Chest,

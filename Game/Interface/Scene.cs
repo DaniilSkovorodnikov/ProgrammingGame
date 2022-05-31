@@ -17,7 +17,6 @@ namespace Game.Interface
         public int ID { get; set; }
         public List<Button> SceneButtons;
         public List<Label> SceneLabels { get; set; }
-        public List<MapCell> SceneSprites { get; set; }
         public Image BackgroundImage { get; set; }
 
         public abstract void InitScene();

@@ -13,9 +13,8 @@ namespace Game.Scenes
 {
     public class Level1 : Scene
     {
-        public List<Scene> Scenes { get; set; }
         private Form game;
-        public Map1 level1;
+        public Map level1;
         public Player player;
         public static Label scoreLabel;
 
@@ -24,9 +23,8 @@ namespace Game.Scenes
             ID = 1;
             SceneButtons = new List<Button>();
             SceneLabels = new List<Label>();
-            SceneSprites = new List<MapCell>();
             this.game = game;
-            level1 = new Map1();
+            level1 = new Map();
             player = new Player(level1.Start, Properties.Resources.Player);
         }
 
@@ -43,14 +41,13 @@ namespace Game.Scenes
         {
             game.KeyDown += OnKeyDownEsc;
             game.Paint += new PaintEventHandler(level1.DrawMap);
-            game.Paint += new PaintEventHandler(Player.DrawPlayer);
+            game.Paint += new PaintEventHandler(player.DrawPlayer);
             scoreLabel = CreateControls.CreateScoreLabel(Controller.score);
             SceneLabels.Add(scoreLabel);
             foreach (var button in SceneButtons)
                 game.Controls.Add(button);
             foreach (var label in SceneLabels)
                 game.Controls.Add(label);
-            Player.currentCoordsOnSprite = new Point(0, 0);
             Controller.MakeStep();
         }
 
@@ -62,7 +59,7 @@ namespace Game.Scenes
             SceneButtons.Clear();
             SceneLabels.Clear();
             game.Paint -= new PaintEventHandler(level1.DrawMap);
-            game.Paint -= new PaintEventHandler(Player.DrawPlayer);
+            game.Paint -= new PaintEventHandler(player.DrawPlayer);
             game.KeyDown -= OnKeyDownEsc;
         }
     }

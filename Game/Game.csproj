@@ -58,7 +58,6 @@
     <Compile Include="Interface\SceneManager.cs" />
     <Compile Include="Interface\Scene.cs" />
     <Compile Include="Interface\CreateControls.cs" />
-    <Compile Include="MapController\Map1.cs" />
     <Compile Include="MapController\Map.cs" />
     <Compile Include="MapController\MapCell.cs" />
     <Compile Include="GameController\Player.cs" />

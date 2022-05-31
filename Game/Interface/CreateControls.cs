@@ -33,7 +33,7 @@ namespace Game.Interface
             return button;
         }
         
-        public static Panel CreateQuestionPanel()
+        public static Panel CreateQuestionPanel(string questionText, List<string> possibleAnswers)
         {
                 var panel = new Panel();
                 var question = new Label();
@@ -52,12 +52,12 @@ namespace Game.Interface
                 label.Font = new Font("Rockwell", 16);
 
                 question.Location = new Point(0, 40);
-                question.Text = Controller.questions[Controller.currentStep];
+                question.Text = questionText;
                 question.TextAlign = ContentAlignment.MiddleCenter;
                 question.Size = new Size(panel.Width, 74);
                 question.Font = new Font("Rockwell", 16);
 
-                foreach (var answer in Controller.possibleAnswers[Controller.currentStep])
+                foreach (var answer in possibleAnswers[Controller.currentStep])
                     answers.Items.Add(answer);
                 answers.Location = new Point(75, 120);
                 answers.Size = new Size(150, 70);

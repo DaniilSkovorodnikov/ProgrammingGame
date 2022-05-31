@@ -20,8 +20,8 @@ namespace Game.GameController
             {
                 var currentPoint = queue.Dequeue();
                 if (!InBounds(currentPoint.Value)) continue;
-                if (Map1.cells[currentPoint.Value.Y, currentPoint.Value.X] == 1) continue;
-                if(Map1.cells[currentPoint.Value.Y, currentPoint.Value.X] == 2)
+                if (Map.cells[currentPoint.Value.Y, currentPoint.Value.X] == 1) continue;
+                if(Map.cells[currentPoint.Value.Y, currentPoint.Value.X] == 2)
                 {
                     lastPoint = currentPoint;
                     break;
@@ -55,7 +55,7 @@ namespace Game.GameController
 
         private static bool InBounds(Point point)
         {
-            var bounds = new Rectangle(0,0,Map1.cells.GetLength(1), Map1.cells.GetLength(0));
+            var bounds = new Rectangle(0,0,Map.cells.GetLength(1), Map.cells.GetLength(0));
             return bounds.Contains(point);
         }
 

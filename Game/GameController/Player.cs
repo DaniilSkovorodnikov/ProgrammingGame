@@ -12,18 +12,14 @@ namespace Game.GameController
 {
     public class Player
     {   
-        //позиция
         public static int posX { get; set; }
         public static int posY { get; set; }
         public static Image sprite { get; set; }
-        public static Point currentCoordsOnSprite;
-        private static Size size;
-        public static object IsMoving { get; set; }
-        public static int moveDirX { get; set; }
-        public static int moveDirY { get; set;}
+        private Point coordsOnSprite;
+        private Size size;
         private static List<Point> path;
         private static int currentStep;
-        private static bool firstStep = false;
+        private static bool isFirstStep = false;
         private static Form form;
 
         public Player(Point startPos, Bitmap spriteSheet)
@@ -33,7 +29,7 @@ namespace Game.GameController
             sprite = spriteSheet;
             size = new Size(88, 100);
             currentStep = -1;
-            IsMoving = new object();
+            coordsOnSprite = new Point(0, 0);
         }
 
         public static void Move(List<Point> target)
@@ -45,18 +41,18 @@ namespace Game.GameController
         public static void MoveTo(object sender, EventArgs e)
         {
             currentStep++;
-            if (!firstStep)
+            if (!isFirstStep)
             {
                 form = Form.ActiveForm;
                 form.Controls.Remove(Controller.questionPanel);
-                firstStep = true;
+                isFirstStep = true;
             }
             if (currentStep == path.Count)
             {
                 currentStep = -1;
                 SceneManager.Timer.Tick -= MoveTo;
                 form = Form.ActiveForm;
-                firstStep = false;
+                isFirstStep = false;
                 Controller.MakeStep();
                 return;
             }
@@ -78,9 +74,9 @@ namespace Game.GameController
             return new Point((int)x,(int)y);
         }
 
-        public static void DrawPlayer(object sender, PaintEventArgs g)
+        public void DrawPlayer(object sender, PaintEventArgs g)
         {
-            g.Graphics.DrawImage(sprite, new Rectangle(new Point(posX, posY), MapCell.Size), currentCoordsOnSprite.X, currentCoordsOnSprite.Y, 
+            g.Graphics.DrawImage(sprite, new Rectangle(new Point(posX, posY), MapCell.Size), coordsOnSprite.X, coordsOnSprite.Y, 
                 size.Width, size.Height, GraphicsUnit.Pixel);
         }
 

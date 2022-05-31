@@ -14,15 +14,15 @@ namespace Game.GameController
 {
     public class Controller
     {
-        public static Form game;
-        public static List<string> questions;
-        public static List<string> correctAnswers;
-        public static List<List<string>> possibleAnswers;
+        private static Form game;
+        private static List<string> questions;
+        private static List<string> correctAnswers;
+        private static List<List<string>> possibleAnswers;
         private static string currentAnswer;
-        public static int currentStep;
+        public static int currentStep { get; set; }
         private static Stack<Point> prevPositions;
-        public static int score;
-        public static Panel questionPanel;
+        public static int score { get; set; }
+        public static Panel questionPanel { get; set; }
 
         public Controller(Form game)
         {
@@ -57,7 +57,7 @@ namespace Game.GameController
         {
             if (currentStep == questions.Count)
                 return;
-            questionPanel = CreateControls.CreateQuestionPanel();
+            questionPanel = CreateControls.CreateQuestionPanel(questions[currentStep], possibleAnswers[currentStep]);
             game.Controls.Add(questionPanel);
             questionPanel.Controls[3].Click += (sender, e) =>
             {
@@ -96,14 +96,14 @@ namespace Game.GameController
         public static bool IsSteppedOnChest()
         {
             var playerPos = Player.GetCurrentCellPos();
-            return Map1.cells[playerPos.Y, playerPos.X] == 2;
+            return Map.cells[playerPos.Y, playerPos.X] == 2;
         }
 
         public static void OpenChest()
         {
             var playerPos = Player.GetCurrentCellPos();
-            Map1.cells[playerPos.Y, playerPos.X] = 0;
-            Map1.map[playerPos.X, playerPos.Y].CellType = Cell.OpenedChest;
+            Map.cells[playerPos.Y, playerPos.X] = 0;
+            Map.map[playerPos.X, playerPos.Y].CellType = Cell.OpenedChest;
             score++;
         }
     }
